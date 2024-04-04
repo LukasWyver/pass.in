@@ -4,5 +4,15 @@ Content-Type: application/json
 {
 "title": "Unite Api Summit",
 "details": "Um evento para quem é apaixonado por programação",
-"maximumAttendees": 100
+"maximumAttendees": 1
+}
+
+###
+
+POST http://localhost:3333/events/92b6ddc6-de05-4992-99b3-3eda8c90919a/attendees
+Content-Type: application/json
+
+{
+"name": "Lucas Gimenes",
+"email": "wlb.lucas2@gmail.com"
 }

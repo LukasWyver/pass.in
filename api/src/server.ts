@@ -1,32 +1,15 @@
 import fastify from 'fastify'
-import { z } from 'zod'
-import { db } from './lib/prisma'
-import { generateSlug } from './utils/generate-slug'
+import { createEvent } from './routes/create-event';
+import { registerForEvent } from './routes/register-for-event';
+import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 
 const app = fastify()
 
-app.post('/events', async (request, reply) => {
-  const createEventSchema = z.object({
-    title: z.string().min(4),
-    details: z.string().nullable(),
-    maximumAttendees: z.number().int().positive().nullable()
-  })
+app.setValidatorCompiler(validatorCompiler);
+app.setSerializerCompiler(serializerCompiler);
 
-  const data = createEventSchema.parse(request.body)
-
-  const { title, details, maximumAttendees} = data
-
-  const event = await db.event.create({
-    data: {
-      title,
-      details,
-      maximumAttendees,
-      slug: generateSlug(title)
-    }
-  })
-
-  return reply.status(201).send({ eventId: event.id })
-})
+app.register(createEvent)
+app.register(registerForEvent)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP server running 🚀!')
