@@ -1,4 +1,4 @@
-import z from "zod"
+import { z } from "zod"
 import { db } from "../lib/prisma"
 import { FastifyInstance } from "fastify"
 import { generateSlug } from "../utils/generate-slug"
