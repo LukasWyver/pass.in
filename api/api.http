@@ -23,5 +23,8 @@ GET http://localhost:3333/events/92b6ddc6-de05-4992-99b3-3eda8c90919a
 ### GetAttendeeBadge
 GET http://localhost:3333/attendees/5/badge
 
-### GetAttendeeBadge
+### GetAttendeeCheckin
 GET http://localhost:3333/attendees/5/check-in
+
+### GetEventAttendiees
+GET http://localhost:3333/events/92b6ddc6-de05-4992-99b3-3eda8c90919a/attendees?query=lucas
