@@ -10,6 +10,7 @@ import { getAttendeeBadge } from './routes/get-attendee-badge';
 import { registerForEvent } from './routes/register-for-event';
 import { getEventAttendees } from './routes/get-event-attendees';
 import { serializerCompiler, validatorCompiler, jsonSchemaTransform } from "fastify-type-provider-zod";
+import { errorHandler } from './error-handler';
 
 const app = fastify()
 
@@ -39,6 +40,8 @@ app.register(createEvent)
 app.register(registerForEvent)
 app.register(getAttendeeBadge)
 app.register(getEventAttendees)
+
+app.setErrorHandler(errorHandler)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP server running 🚀!')
